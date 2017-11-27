@@ -30,4 +30,4 @@ npm run scripts
 * Add .env to your .gitignore
 * This is where you'll put environment config stuff. Like the url for our db
 * Create API routes, api folder,w/ index.js file
-* Require API route and wire up app.use
+* Require API route and wire up app.use for articles
