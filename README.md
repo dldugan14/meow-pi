@@ -15,6 +15,15 @@
 * reconfigure npm scripts in our package.json to `"start": "nodemon ./bin/www"`
 * Create a git repo on Github, and push or init commit, please
 
+npm run scripts
+
+```js
+//windows
+"start": "set DEBUG=meow-pi:* & nodemon ./bin/www"
+//mac
+"start": "DEBUG=meow-pi:* nodemon ./bin/www"
+```
+
 # Part 02
 
 * `npm install dotenv` and create a .env for our configs
