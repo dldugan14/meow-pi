@@ -38,3 +38,6 @@ npm run scripts
 * Articles Model with basic properties
 * and our '/api/articles' with a GET request now returns a hardcoded 10, in
   order of most recent 'createdAt'
+* We should now be able to use [Postman](https://www.getpostman.com/) and do a
+  GET request to 'localhost:3000/api/articles' and see 10 articles of the more
+  recent come back!
