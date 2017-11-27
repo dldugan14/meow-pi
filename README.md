@@ -3,6 +3,7 @@
 * [meow-pi](#meow-pi)
 * [Part 01](#part-01)
 * [Part 02](#part-02)
+* [Part 03](#part-03)
 
 <!-- /TOC -->
 
@@ -31,3 +32,9 @@ npm run scripts
 * This is where you'll put environment config stuff. Like the url for our db
 * Create API routes, api folder,w/ index.js file
 * Require API route and wire up app.use for articles
+
+# Part 03
+
+* Articles Model with basic properties
+* and our '/api/articles' with a GET request now returns a hardcoded 10, in
+  order of most recent 'createdAt'

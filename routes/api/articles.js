@@ -1,7 +1,17 @@
 const articleRouter = require("express").Router();
+const Article = require("../../models/Article");
 
 articleRouter.route("/").get(function(req, res, next) {
-  res.send("OH CRAP I HOPE THIS WORKS?");
+  Article.find({})
+    .limit(10)
+    .sort({ createdAt: "desc" })
+    .exec(function(err, payload) {
+      if (err) {
+        next(err);
+      } else {
+        res.send(payload);
+      }
+    });
 });
 
 module.exports = articleRouter;
