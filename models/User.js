@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt-nodejs");
+const crypto = require("crypto");
 
 const UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
-  password: String
+  hash: String,
+  salt: String
 });
 
 //On Save Hook, encrypt the password
@@ -14,31 +15,25 @@ UserSchema.pre("save", function(next) {
   const user = this;
 
   //generate a salty pirate, lol
-  bcrypt.genSalt(10, function(err, salt) {
-    if (err) {
-      return next(err);
-    }
-
-    // now we have a salt to apply to our password
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
-      if (err) {
-        return next(err);
-      }
-
-      //replace user.password with new fancy hash
-      user.password = hash;
-      next();
-    });
-  });
+  user.salt = crypto.randomBytes(16).toString("hex");
+  user.hash = crypto
+    .pbkdf2Sync(user.password, user.salt, 10000, 512, "sha512")
+    .toString("hex");
+  next();
 });
 
 UserSchema.methods.comparePassword = function(candidatePassword, callback) {
-  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-    if (err) {
-      next(err);
-    }
-    callback(null, isMatch);
-  });
+  var candidateHash = crypto
+    .pbkdf2Sync(candidatePassword, this.salt, 10000, 512, "sha512")
+    .toString("hex");
+  if (!candidateHash) {
+    const err = new Error("Failed Hash");
+    callback(err, false);
+  } else if (this.hash === candidateHash) {
+    callback(null, true);
+  } else {
+    callback(null, false);
+  }
 };
 
 //export for uses
