@@ -13,3 +13,5 @@ userRouter.route("/login").post(function(req, res, next) {
 
   //here we'll do our passport auth to check for user in local db
 });
+
+module.exports = userRouter;
