@@ -54,7 +54,14 @@ npm run scripts
 
 * Configure Passport for JWT and for Local
 * Apply to User Login endpoint '/api/users/login'
+* Passport will need 2 strategies, local and jwt. We've got a root file
+  'passport.js' that will have a new instance of each strategy.
+* We've had to back track on comparePassword and our pre-save methods to use
+  crypto instead of bycrypt. Why? Because the server that has been inputing info
+  thus far, has been using a particular hash that we need to follow.
+* Once passport local has verified the user email and password, it will append
+  that user object to the request object, and call next.
 
 ```js
-npm install passport passport-jwt passport-local jwt-simple
+npm install passport passport-jwt passport-local jwt-simple, crypto
 ```
