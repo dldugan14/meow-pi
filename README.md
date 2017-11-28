@@ -53,3 +53,8 @@ npm run scripts
 # Part 05
 
 * Configure Passport for JWT and for Local
+* Apply to User Login endpoint '/api/users/login'
+
+```js
+npm install passport passport-jwt passport-local jwt-simple
+```

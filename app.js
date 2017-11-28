@@ -7,8 +7,6 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var routes = require("./routes");
 
-require("dotenv").config();
-
 var app = express();
 //db setup
 const db = mongoose.connection;
