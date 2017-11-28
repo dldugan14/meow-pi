@@ -4,6 +4,8 @@
 * [Part 01](#part-01)
 * [Part 02](#part-02)
 * [Part 03](#part-03)
+* [Part 04](#part-04)
+* [Part 05](#part-05)
 
 <!-- /TOC -->
 
@@ -41,3 +43,13 @@ npm run scripts
 * We should now be able to use [Postman](https://www.getpostman.com/) and do a
   GET request to 'localhost:3000/api/articles' and see 10 articles of the more
   recent come back!
+
+# Part 04
+
+* User Model `npm install bcrypt-nodejs`
+* Bcrypt, hashing & storing passwords
+* Users route for login at '/api/users/login'
+
+# Part 05
+
+* Configure Passport for JWT and for Local
