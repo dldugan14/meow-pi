@@ -65,3 +65,12 @@ npm run scripts
 ```js
 npm install passport passport-jwt passport-local jwt-simple, crypto
 ```
+
+* email and password for login verify
+
+```js
+{
+      "email":"meow@pants.com",
+      "password":"testing001"
+}
+```
