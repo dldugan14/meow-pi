@@ -8,6 +8,7 @@
 * [Part 05](#part-05)
 * [Part 06](#part-06)
 * [Part 07](#part-07)
+* [Part 08](#part-08)
 
 <!-- /TOC -->
 
@@ -97,5 +98,17 @@ npm install passport passport-jwt passport-local jwt-simple, crypto
 
 # Part 07
 
-* Pretty out the http error
-* User Profile PUT request
+* `npm install slug express-jwt`
+* user route '/api/users' as GET request should return the users profile,
+  cleaned up using our jsonForUser method. Sweet.
+* Create auth.required to make protected routes. These are ones that require a
+  valid JWT in order to execute, otherwise returning 401 unauthorized.
+* Add an author property to the Articles Model, that is a ref to 'Users'
+* Article also has a pre 'validate' method and slugify method.
+
+# Part 08
+
+* The Article model is fleshed out. Now we are looking to make 2 routes.
+* POST http request to '/api/articles' that will allow users, who are signed in,
+  to add a new article. You will need to pass your jwt token in the POST as a
+  `Header authoriztion: Bearer <Actual Token Here>`
