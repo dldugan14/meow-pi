@@ -3,6 +3,14 @@ const Schema = mongoose.Schema;
 const crypto = require("crypto");
 
 const UserSchema = new Schema({
+  username: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    require: [true, "can't be blank"],
+    match: [/^[a-zA-Z0-9]+$/, "is invalid"],
+    index: true
+  },
   email: { type: String, unique: true, lowercase: true },
   hash: String,
   salt: String
@@ -15,12 +23,20 @@ UserSchema.pre("save", function(next) {
   const user = this;
 
   //generate a salty pirate, lol
-  user.salt = crypto.randomBytes(16).toString("hex");
-  user.hash = crypto
-    .pbkdf2Sync(user.password, user.salt, 10000, 512, "sha512")
-    .toString("hex");
+  // user.salt = crypto.randomBytes(16).toString("hex");
+  // user.hash = crypto
+  //   .pbkdf2Sync(user.password, user.salt, 10000, 512, "sha512")
+  //   .toString("hex");
   next();
 });
+
+//create user salt and hashcakes from password
+UserSchema.methods.setPassword = function(password) {
+  this.salt = crypto.randomBytes(16).toString("hex");
+  this.hash = crypto
+    .pbkdf2Sync(password, this.salt, 10000, 512, "sha512")
+    .toString("hex");
+};
 
 UserSchema.methods.comparePassword = function(candidatePassword, callback) {
   var candidateHash = crypto
@@ -37,5 +53,4 @@ UserSchema.methods.comparePassword = function(candidatePassword, callback) {
 };
 
 //export for uses
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+module.exports = mongoose.model("User", UserSchema);

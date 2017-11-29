@@ -6,6 +6,8 @@
 * [Part 03](#part-03)
 * [Part 04](#part-04)
 * [Part 05](#part-05)
+* [Part 06](#part-06)
+* [Part 07](#part-07)
 
 <!-- /TOC -->
 
@@ -74,3 +76,26 @@ npm install passport passport-jwt passport-local jwt-simple, crypto
       "password":"testing001"
 }
 ```
+
+# Part 06
+
+* User Sign up, and expanded model
+* Route for signup is 'api/users' that is POST http method with the following
+  object properties.
+
+```js
+{
+    "username": "StoneWashJackson",
+    "email": "StoneWashJackson@codercamps.com",
+    "password": "testing001"
+}
+```
+
+* Update to the user model with username with type and requirements
+* Notice that the import on the route not the schema, but the mongoose.model of
+  'User'
+
+# Part 07
+
+* Pretty out the http error
+* User Profile PUT request
