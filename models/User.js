@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const crypto = require("crypto");
+const jwt = require("jwt-simple");
 
 const UserSchema = new Schema({
   username: {
@@ -13,7 +14,8 @@ const UserSchema = new Schema({
   },
   email: { type: String, unique: true, lowercase: true },
   hash: String,
-  salt: String
+  salt: String,
+  image: String
 });
 
 //On Save Hook, encrypt the password
@@ -52,5 +54,34 @@ UserSchema.methods.comparePassword = function(candidatePassword, callback) {
   }
 };
 
+UserSchema.methods.generateJWT = function() {
+  const timestamp = new Date().getTime();
+  return jwt.encode(
+    {
+      sub: this._id,
+      iat: timestamp,
+      email: this.email
+    },
+    process.env.SUPER_JWT_SECRET
+  );
+};
+
+UserSchema.methods.toJSON = function() {
+  return {
+    username: this.username,
+    email: this.email,
+    token: this.generateJWT()
+  };
+};
+
+UserSchema.methods.toProfileJSONFor = function(user) {
+  return {
+    username: this.username,
+    image:
+      this.image || "https://static.productionready.io/images/smiley-cyrus.jpg"
+  };
+};
+
 //export for uses
-module.exports = mongoose.model("User", UserSchema);
+var User = mongoose.model("User", UserSchema);
+module.exports = User;

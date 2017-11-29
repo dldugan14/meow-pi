@@ -1,4 +1,5 @@
 var jwt = require("express-jwt");
+require("dotenv").config();
 
 function getTokenFromHeader(req) {
   if (

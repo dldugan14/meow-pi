@@ -27,5 +27,18 @@ ArticleSchema.methods.slugify = function() {
     ((Math.random() * Math.pow(36, 6)) | 0).toString(36);
 };
 
-const Article = mongoose.model("Article", ArticleSchema);
+ArticleSchema.methods.toJSONFor = function(user) {
+  return {
+    slug: this.slug,
+    title: this.title,
+    description: this.description,
+    body: this.body,
+    createdAt: this.createdAt,
+    updatedAt: this.updatedAt,
+    author: this.author.toProfileJSONFor(user)
+  };
+};
+
+//export for uses
+var Article = mongoose.model("Article", ArticleSchema);
 module.exports = Article;

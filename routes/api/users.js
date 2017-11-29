@@ -1,13 +1,13 @@
 var mongoose = require("mongoose");
 var userRouter = require("express").Router();
 const passport = require("passport");
-const jwt = require("jwt-simple");
 
 const passportService = require("../../passport");
 const requireLogin = passport.authenticate("local", { session: false });
 const auth = require("../auth");
 
-const User = mongoose.model("User");
+// const User = mongoose.model("User");
+const User = require("../../models/User");
 
 //Send User their profile inJERK
 userRouter.route("/").get(auth.required, function(req, res, next) {
@@ -31,7 +31,7 @@ userRouter.route("/").get(auth.required, function(req, res, next) {
 userRouter.route("/login").post(requireLogin, function(req, res, next) {
   //here we'll do our passport auth to check for user in local db
   res.send({
-    token: tokenForUser(req.user),
+    token: req.user.generateJWT(),
     email: req.user.email
   });
 });
@@ -48,32 +48,9 @@ userRouter.route("/").post(function(req, res, next) {
     if (err) {
       next(err);
     } else {
-      res.json({ user: jsonForUser(userPayload) });
+      res.json({ user: userPayload.toJSON() });
     }
   });
 });
-
-function tokenForUser(user) {
-  const timestamp = new Date().getTime();
-  return jwt.encode(
-    {
-      sub: user.id,
-      iat: timestamp,
-      email: user.email
-    },
-    process.env.SUPER_JWT_SECRET
-  );
-}
-
-//Return user payload
-function jsonForUser(user) {
-  return {
-    username: user.username,
-    email: user.email,
-    token: tokenForUser(user)
-    // bio: this.bio,
-    // image: this.image
-  };
-}
 
 module.exports = userRouter;
