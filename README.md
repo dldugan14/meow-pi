@@ -112,3 +112,8 @@ npm install passport passport-jwt passport-local jwt-simple, crypto
 * POST http request to '/api/articles' that will allow users, who are signed in,
   to add a new article. You will need to pass your jwt token in the POST as a
   `Header authoriztion: Bearer <Actual Token Here>`
+* Sample JSON for POST request
+
+```js
+{"article":{"title":"Meow","description":"hope","body":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","tagList":[]}}
+```
