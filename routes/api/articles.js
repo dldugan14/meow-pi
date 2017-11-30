@@ -37,4 +37,17 @@ articleRouter.route("/").post(auth.required, function(req, res, next) {
     .catch(next);
 });
 
+articleRouter.route("/:slug").get(auth.required, function(req, res, next) {
+  const slug = req.params.slug;
+  Article.findOne({ slug: slug })
+    .populate("author")
+    .then(function(article) {
+      if (!article) {
+        return res.sendStatus(404);
+      }
+      res.send({ article: article.toJSONFor() });
+    })
+    .catch(next);
+});
+
 module.exports = articleRouter;
