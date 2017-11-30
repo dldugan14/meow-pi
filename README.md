@@ -121,10 +121,11 @@ npm install passport passport-jwt passport-local jwt-simple, crypto
 
 # Part 09
 
+* **THIS IS A NEW ENDPOINT**
 * We need an endpoint that will allow us to send the article slug to the server
   and get back the entire article back. From the client this is called when the
   user clicks on an article preview.
-* '/api/article/<SLUG>' keep in mind that <SLUG> is dynamic! This is like our
+* '/api/articles/<SLUG>' keep in mind that <SLUG> is dynamic! This is like our
   routing for the client, we need a single endpoint that can take in any slug
   and return that particular article,
 * it should also populate the author details, and not just the author Object ID
