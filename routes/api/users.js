@@ -19,7 +19,7 @@ userRouter.route("/").get(auth.required, function(req, res, next) {
       }
 
       return res.json({
-        user: jsonForUser(userPayload),
+        user: userPayload.toJSON(),
         song:
           "HERE I AM ON THE PHONE, GOING DOWN THE ONLY ROAD I'VE BEEN LIVING ON"
       });

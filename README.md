@@ -9,6 +9,7 @@
 * [Part 06](#part-06)
 * [Part 07](#part-07)
 * [Part 08](#part-08)
+* [Part 09](#part-09)
 
 <!-- /TOC -->
 
@@ -117,3 +118,13 @@ npm install passport passport-jwt passport-local jwt-simple, crypto
 ```js
 {"article":{"title":"Meow","description":"hope","body":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","tagList":[]}}
 ```
+
+# Part 09
+
+* We need an endpoint that will allow us to send the article slug to the server
+  and get back the entire article back. From the client this is called when the
+  user clicks on an article preview.
+* '/api/article/<SLUG>' keep in mind that <SLUG> is dynamic! This is like our
+  routing for the client, we need a single endpoint that can take in any slug
+  and return that particular article,
+* it should also populate the author details, and not just the author Object ID
